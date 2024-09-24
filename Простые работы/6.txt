@@ -1,0 +1,26 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+int main()
+{
+    float a, b;
+    cout <<"\na= "; cin>>a;
+    cout <<"\nb= "; cin>>b;
+    while (a!=b)
+    {
+     if (a>b)
+     {
+     cout <<"\n a больше!";
+       a=a-b;
+     }
+     else
+     {
+     cout <<"\n b больше!";
+       b=b-a;
+     }
+     }
+     cout <<"\na = " << a;
+     cout <<"\nb = " << b;
+     cout <<"\n Конец";
+    return 0;
+}

@@ -1,0 +1,15 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+int main()
+{
+    float n;
+    cout <<"\nn= "; cin>>n;
+    while (n!=5)
+    {
+       cout <<"\n Конец";
+        n=n+1;
+    }
+    cout <<"\n ghhgh";
+    return 0;
+}

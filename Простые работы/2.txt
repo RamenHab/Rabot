@@ -1,0 +1,16 @@
+#include <iostream>
+#include<math.h>
+using namespace std;
+int main() 
+{
+    float a,b,c,s;
+    cout << "\nВведите значение a="; cin >> a;
+    cout << "\nВведите значение b="; cin >> b;
+    cout << "\nВведите значение c="; cin >> c;
+    s=a+b+c;
+   if (s>=15)
+    cout << "\n Построить можно, s=" << s;
+    else
+    cout << "\n Построить нельзя, s=" << s;
+    return 0;
+}
