@@ -1,0 +1,34 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+int main() 
+{
+float b,x,c,a;
+cout«"\nВведите число a= "; cin»a;
+cout«"\nВведите число b= "; cin»b;
+if (a==0)
+  {
+    if (b==0);
+     {
+      cout«"\nХ любое";
+     }
+    else
+     {
+       cout«"\nРешения нет";
+     }
+  }
+ else
+ {
+ c=b/a;
+ if (a>0)
+  {
+      cout«"\nx>c";
+  }
+  else
+  {
+     cout«"\nx<c";
+  }
+ }
+ cout«"\nEND";
+    return 0;
+}

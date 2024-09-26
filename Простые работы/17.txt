@@ -1,0 +1,25 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+int main() 
+{
+float x,c,a;
+cout«"\nВведите число a= "; cin»a;
+if (a==0)
+  {
+    cout«"\n x любое"«endl;
+  }
+  else
+    {
+    c=3/a;
+      if (a>0)
+        {
+        cout«"\n x<c"«endl;
+        }
+      else
+          {
+            cout«"\n x>c"«endl;
+          }
+    }
+    return 0;
+}
