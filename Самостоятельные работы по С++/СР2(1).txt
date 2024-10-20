@@ -1,0 +1,23 @@
+//СР 2(1)
+//Вычисление математического уравнения
+#include<iostream>
+#include<math.h>
+using namespace std;
+int main()
+{
+    //float задает переменные
+    float a, b, c, s, p, f;
+    //Дается возможность ввода данных для переменных a,b,c
+    cout « "\na="; cin » a;
+    cout « "\nb="; cin » b;
+    cout « "\nc="; cin » c;
+    //Происходит вычисление по формуле
+    s=(b+sqrt(pow(b,2)+(4*a*c)))/(2*a);
+    p=pow(a,3)*c+pow(b,-2);
+    f=(s-p);
+    //Вывод значений s,p,f. Завершение программы.
+    cout « "\n ответ равен = " « s;
+    cout « "\n ответ равен = " « p;
+    cout « "\n ответ равен = " « f;
+    return 0;
+}
