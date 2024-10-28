@@ -1,0 +1,99 @@
+import tkinter as tk
+from tkinter import PhotoImage
+
+#Название и логотип программы
+res =[]
+root = tk.Tk()
+root.title("Вычисление победителя по Триатлону")
+
+iconphoto=tk.PhotoImage(file="logo.png")
+root.iconphoto(root,iconphoto)
+
+#Установление параметров
+screen_width = root.winfo_screenwidth()
+screen_height = root.winfo_screenheight()
+window_width = 900
+window_height = 550
+x = (screen_width // 2) - (window_width // 2)
+y = (screen_height // 2) - (window_height // 2)
+root.geometry(f"{window_width}x{window_height}+{x}+{y}")
+#Функция подсчета итогового времени
+def button_time():
+   res1 = (int(entry1.get())+int(entry2.get())+int(entry3.get()))
+   tog.config (text=res1)
+   res.append(res1)
+
+   res2 = (int(entry5.get())+int(entry6.get())+int(entry7.get()))
+   tog2.config (text=res2)
+   res.append(res2)
+
+   res3 = (int(entry9.get())+int(entry10.get())+int(entry11.get()))
+   tog3.config (text=res3)
+   res.append(res3)
+#Функция вывода чемпиона
+def button_chimpion():
+   max_nun = max(res)
+   tog4.config (text = max_nun)
+#Название столбиков и их местоположение
+label = tk.Label(root, text ="Соревнование по Триатлону")
+label.pack()
+
+label1 = tk.Label(root, text ="Баллы")
+label1.place(x=270, y=50)
+label2 = tk.Label(root, text ="Рахитоид")
+label2.place(x=370, y=50)
+label3 = tk.Label(root, text ="Огузок")
+label3.place(x=470, y=50)
+label4 = tk.Label(root, text ="Инвалид")
+label4.place(x=570, y=50)
+
+label5 = tk.Label(root, text ="Бокс")
+label5.place(x=245, y=100)
+label6 = tk.Label(root, text ="Борьба")
+label6.place(x=245, y=150)
+label7 = tk.Label(root, text ="Фехтование")
+label7.place(x=245, y=200)
+label8 = tk.Label(root, text ="Общие баллы")
+label8.place(x=245, y=250)
+#Названия, функции и местоположения кнопок
+button = tk.Button(root, text="Кнопка времени", command=button_time)
+button.place(x=245, y=300)
+button1 = tk.Button(root, text="Чемпион", command=button_chimpion)
+button1.place(x=370, y=300)
+#Поля для ввода данных и их местоположение
+entry1 = tk.Entry(root)
+entry1.place(x=370, y=100 )
+entry2 = tk.Entry(root)
+entry2.place(x=370, y=150 )
+entry3 = tk.Entry(root)
+entry3.place(x=370, y=200 )
+tog = tk.Label(root)
+tog.place(x=370, y=250 )
+
+entry5 = tk.Entry(root)
+entry5.place(x=470, y= 100)
+entry6 = tk.Entry(root)
+entry6.place(x=470, y= 150)
+entry7 = tk.Entry(root)
+entry7.place(x=470, y= 200)
+tog2 = tk.Label(root)
+tog2.place(x=470, y= 250)
+
+entry9 = tk.Entry(root)
+entry9.place(x=570, y= 100)
+entry10 = tk.Entry(root)
+entry10.place(x=570, y= 150)
+entry11 = tk.Entry(root)
+entry11.place(x=570, y= 200)
+tog3 = tk.Label(root)
+tog3.place(x=570, y= 250)
+
+tog4 = tk.Label(root)
+tog4.place(x=450, y=305)
+#Картинка на главном экране
+image = PhotoImage(file="logo.png")
+image_label = tk.Label(root, image=image)
+image_label.place(x=10, y=70)
+
+#Завершение программы
+root.mainloop()
