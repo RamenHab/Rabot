@@ -1,0 +1,59 @@
+import tkinter as tk
+import math 
+import array
+#Название декстопного приложения
+res2=[]
+root = tk.Tk()
+root.title("Калькулятор массива")
+
+#Параметры декстопного приложения
+screen_width = root.winfo_screenwidth()
+screen_height = root.winfo_screenheight()
+window_width = 900
+window_height = 550
+x = (screen_width // 2) - (window_width // 2)
+y = (screen_height // 2) - (window_height // 2)
+root.geometry(f"{window_width}x{window_height}+{x}+{y}") 
+
+#Функции
+def sum():
+    summa = int(entry1.get()) + int(entry2.get()) + int(entry3.get()) + int(entry4.get())
+    label.config(text=summa)
+def pro():
+    prod = int(entry1.get()) * int(entry2.get()) * int(entry3.get()) * int(entry4.get())
+    label.config(text=prod)
+def mak():
+    res1 = [int (entry1.get()),int (entry2.get()),int (entry3.get()),int (entry4.get())]
+    res2 = res1
+    maxnun = max(res2)
+    label.config(text=maxnun)
+def mino():
+    res1 = [int (entry1.get()),int (entry2.get()),int (entry3.get()),int (entry4.get())]
+    res2 = res1
+    mixnun = min(res2)
+    label.config(text=mixnun)
+
+#Заголовок
+label= tk.Label(root, text ="Элементы массива")
+label.pack()
+#Кнопки
+button1 = tk.Button(root, text="Сумма", command=sum)
+button1.place(x=245, y=100)
+button2 = tk.Button(root, text="Произведение", command=pro)
+button2.place(x=245, y=200)
+button3 = tk.Button(root, text="Максимум", command=mak)
+button3.place(x=245, y=300)
+button4 = tk.Button(root, text="Минимум", command=mino)
+button4.place(x=245, y=400)
+#Поля для ввода
+entry1 = tk.Entry(root)
+entry1.place(x=370, y=100 )
+entry2 = tk.Entry(root)
+entry2.place(x=370, y=200 )
+entry3 = tk.Entry(root)
+entry3.place(x=370, y=300 )
+entry4 = tk.Entry(root)
+entry4.place(x=370, y=400 )
+
+#Завершение программы
+root.mainloop()
