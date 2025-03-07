@@ -1,0 +1,94 @@
+#include <iostream>
+#include <stack>
+#include <map>
+#include <string>
+
+using namespace std;
+
+class Expression {
+public:
+    virtual double interpret(map<string, double>& context) = 0;
+};
+
+class BinaryExpression : public Expression {
+protected:
+    Expression* left;
+    Expression* right;
+public:
+    BinaryExpression(Expression* l, Expression* r) : left(l), right(r) {}
+    ~BinaryExpression() {
+        delete left;
+        delete right;
+    }
+};
+
+class VariableExpression : public Expression {
+private:
+    string key;
+public:
+    VariableExpression(const string& k) : key(k) {}
+    double interpret(map<string, double>& context) override {
+        return context[key];
+    }
+};
+
+class ConstantExpression : public Expression {
+private:
+    double value;
+public:
+    ConstantExpression(double val) : value(val) {}
+    double interpret(map<string, double>& context) override {
+        return value;
+    }
+};
+
+class AddExpression : public BinaryExpression {
+public:
+    AddExpression(Expression* l, Expression* r) : BinaryExpression(l, r) {}
+    double interpret(map<string, double>& context) override {
+        return left->interpret(context) + right->interpret(context);
+    }
+};
+
+class MultiplyExpression : public BinaryExpression {
+public:
+    MultiplyExpression(Expression* l, Expression* r) : BinaryExpression(l, r) {}
+    double interpret(map<string, double>& context) override {
+        return left->interpret(context) * right->interpret(context);
+    }
+};
+
+Expression* parse_expression(const string& expression) {
+    map<char, char> operators = {{'+', '+'}, {'*', '*'}};
+    stack<Expression*> expression_stack;
+    istringstream iss(expression);
+    string token;
+
+    while (iss >> token) {
+        if (operators.find(token[0]) != operators.end()) {
+            Expression* right = expression_stack.top(); expression_stack.pop();
+            Expression* left = expression_stack.top(); expression_stack.pop();
+            switch (token[0]) {
+                case '+': expression_stack.push(new AddExpression(left, right)); break;
+                case '*': expression_stack.push(new MultiplyExpression(left, right)); break;
+            }
+        } else if (isdigit(token[0])) {
+            expression_stack.push(new ConstantExpression(stod(token)));
+        } else {
+            expression_stack.push(new VariableExpression(token));
+        }
+    }
+    return expression_stack.top();
+}
+
+int main() {
+    map<string, double> context;
+    context["x"] = 20.0;
+    context["y"] = 30.0;
+
+    Expression* expression = parse_expression("x + y * 2");
+    cout << expression->interpret(context) << endl;  
+
+    delete expression;
+    return 0;
+}

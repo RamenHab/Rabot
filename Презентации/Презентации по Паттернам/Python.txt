@@ -1,0 +1,65 @@
+class Expression:
+    def interpret(self, context):
+        raise NotImplementedError("Метод interpret должен быть переопределен!")
+
+class NonTerminalExpression(Expression):
+    def __init__(self, left, right):
+        self.left = left
+        self.right = right
+
+class TerminalExpression(Expression):
+    def __init__(self, value):
+        self.value = value
+
+class Context:
+    def __init__(self):
+        self.variables = {}
+
+    def get_value(self, variable_name):
+        return self.variables.get(variable_name, None)
+
+    def set_value(self, variable_name, value):
+        self.variables[variable_name] = value
+
+class AddExpression(NonTerminalExpression):
+    def interpret(self, context):
+        return self.left.interpret(context) + self.right.interpret(context)
+
+class MultiplyExpression(NonTerminalExpression):
+    def interpret(self, context):
+        return self.left.interpret(context) * self.right.interpret(context)
+
+class VariableExpression(TerminalExpression):
+    def interpret(self, context):
+        return context.get_value(self.value)
+
+class ConstantExpression(TerminalExpression):
+    def interpret(self, context):
+        return float(self.value)
+
+def parse_expression(expression_string):
+    tokens = expression_string.split()
+    stack = []
+    for token in tokens:
+        if token.isdigit():
+            stack.append(ConstantExpression(token))
+        elif token.isalpha():
+            stack.append(VariableExpression(token))
+        elif token == '+':
+            right = stack.pop()
+            left = stack.pop()
+            stack.append(AddExpression(left, right))
+        elif token == '*':
+            right = stack.pop()
+            left = stack.pop()
+            stack.append(MultiplyExpression(left, right))
+    return stack.pop()
+
+if __name__ == "__main__":
+    context = Context()
+    context.set_value('x', 20)
+    context.set_value('y', 30)
+
+    expression = parse_expression("x + y * 2")
+    result = expression.interpret(context)
+    print(result)
